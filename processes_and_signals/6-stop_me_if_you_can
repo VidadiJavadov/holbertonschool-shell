@@ -6,8 +6,9 @@ PID=$(pgrep -f 4-to_infinity_and_beyond)
 
 # Check if the PID was found
 if [ -n "$PID" ]; then
-    # Send SIGTERM using /proc interface
-    echo "15" > /proc/$PID/oom_score_adj 2>/dev/null
-    exec -p $PID 2>/dev/null
+    # Quote $PID to avoid word splitting and globbing
+    echo "15" > "/proc/$PID/oom_score_adj" 2>/dev/null
+    exec -p "$PID" 2>/dev/null
 fi
+
 
