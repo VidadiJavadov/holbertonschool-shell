@@ -2,6 +2,13 @@
 #comment
 # shellcheck disable=SC2009
 
-pid=$(ps aux | grep '[4]-to_infinity_and_beyond' | awk '{print $2}')
+pid=$(pgrep -f 4-to_infinity_and_beyond)
 
-kill $pid
+if [ -z "$pid" ]; then
+  echo "No 4-to_infinity_and_beyond process found."
+  exit 1
+fi
+
+kill "$pid"
+echo "Stopped process $pid"
+
