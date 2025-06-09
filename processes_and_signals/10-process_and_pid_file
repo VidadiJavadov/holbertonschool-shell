@@ -1,20 +1,37 @@
 #!/usr/bin/env bash
-# Create PID file
-echo $$ > /var/run/myscript.pid
+#comment
 
-# Cleanup function
-cleanup() {
-    rm -f /var/run/myscript.pid
-    exit
+PID_FILE="/var/run/myscript.pid"
+
+# Function to handle SIGTERM
+term_handler() {
+    echo "I hate the kill command"
+    cleanup_and_exit
 }
 
-# Signal handlers
-trap 'echo "I hate the kill command"; cleanup' SIGTERM
-trap 'echo "Y U no love me?!"; cleanup' SIGINT
-trap cleanup SIGQUIT
+# Function to handle SIGINT
+int_handler() {
+    echo "Y U no love me?!"
+}
 
-# Main loop
+# Function to handle SIGQUIT and also used for cleanup on exit
+cleanup_and_exit() {
+    if [ -f "$PID_FILE" ]; then
+        rm "$PID_FILE"
+    fi
+    exit 0
+}
+
+# Set up signal traps
+trap 'term_handler' SIGTERM
+trap 'int_handler' SIGINT
+trap 'cleanup_and_exit' SIGQUIT
+
+# Create PID file
+echo $$ > "$PID_FILE"
+
+# Display indefinitely
 while true; do
     echo "To infinity and beyond"
-    sleep 1
+    sleep 1 # Sleep for a second to avoid busy-waiting
 done
