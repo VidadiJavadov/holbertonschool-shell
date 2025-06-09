@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#comment
 
 TARGET_PROCESS_NAME="4-to_infinity_and_beyond"
 
