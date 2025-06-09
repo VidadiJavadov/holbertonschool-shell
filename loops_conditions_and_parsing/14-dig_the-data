@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #apache
 
 awk '{print $1, $9}' access.log | awk '{count[$1,$2]++} END {
