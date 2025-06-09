@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #comment
 
-pkill -f 4-to_infinity_and_beyond && echo "Stopped 4-to_infinity_and_beyond"
+pkill -f 4-to_infinity_and_beyond
 
