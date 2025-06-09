@@ -2,4 +2,4 @@
 #WithBash
 # shellcheck disable=SC2009
 
-ps | grep bash
+echo "$$"
