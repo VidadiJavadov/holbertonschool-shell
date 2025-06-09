@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
-#comment
 
-# This script finds and stops the process named "4-to_infinity_and_beyond".
-# It avoids using the 'kill' or 'killall' commands as per the requirements.
-
-# The name of the process to stop
 TARGET_PROCESS_NAME="4-to_infinity_and_beyond"
 
 # Use pkill to send the default TERM signal (15) to the process.
-# This signal politely requests the process to terminate.
-# 'pkill' finds processes by name and then signals them.
-pkill "$TARGET_PROCESS_NAME"
-
-# Optional: Add a brief message to confirm action (for user feedback)
-if [ $? -eq 0 ]; then
+# The 'if' statement directly checks pkill's exit status.
+if pkill "$TARGET_PROCESS_NAME"; then
     echo "Attempted to stop '$TARGET_PROCESS_NAME' process."
 else
     echo "Could not find or stop '$TARGET_PROCESS_NAME' process."
 fi
-
-
