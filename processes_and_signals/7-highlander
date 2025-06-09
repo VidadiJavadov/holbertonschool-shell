@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #comment
 
-# Trap SIGTERM and print a message before exiting
 trap 'echo "I am invincible!!!"; exit' SIGTERM
 
+# Loop until killed
 while true; do
   echo "To infinity and beyond indefinitely"
   sleep 2
