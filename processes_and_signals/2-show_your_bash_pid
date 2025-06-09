@@ -2,4 +2,5 @@
 #WithBash
 # shellcheck disable=SC2009
 
-echo "$$"
+ps f -u "$USER" | grep bash
+
