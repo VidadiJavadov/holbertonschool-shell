@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 #apache
 
+LOG_FILE="apache-access.log"
 
+if [ ! -f "$LOG_FILE" ]; then
+  echo "Error: Apache log file '$LOG_FILE' not found."
+  echo "Please ensure 'apache-access.log' is in the same directory as this script."
+  exit 1
+fi
 
-awk '{print $1, $9}' apache-access.log | sort | uniq -c | awk '{print $1, $2, $3}' | sort -rn
-
-
-
+# Use awk to count occurrences of IP + HTTP_CODE pairs.
+# Instead of iterating with 'for', we'll rely on generating raw counts
+# and then use sort to handle the aggregation and ordering.
+awk '{
+    # Directly print the IP and HTTP status code for each line.
+    # This creates a list of all raw combinations.
+    print $1, $9
+}' "$LOG_FILE" | sort | uniq -c | sort -rn
