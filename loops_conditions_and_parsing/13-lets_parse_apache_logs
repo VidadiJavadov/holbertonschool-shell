@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#Log File
+
+
+LOG_FILE="apache-access.log"
+
+# Check if the log file exists
+if [ ! -f "$LOG_FILE" ]; then
+  echo "Error: Apache log file '$LOG_FILE' not found."
+  echo "Please download and place 'apache-access.log' in the same directory as this script."
+  exit 1
+fi
+
+awk '{print $1, $9}' "$LOG_FILE"
