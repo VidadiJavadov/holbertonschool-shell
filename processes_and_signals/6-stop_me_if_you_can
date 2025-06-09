@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
-# This script finds and stops the process named "4-to_infinity_and_beyond".
-# It avoids using the 'kill' or 'killall' commands.
+#comment
 
 TARGET_PROCESS_NAME="4-to_infinity_and_beyond"
-
-# Use 'pkill -f' to search the full command line for the target process name.
-# This ensures it finds scripts executed via bash.
 if pkill -f "$TARGET_PROCESS_NAME"; then
-    echo "Attempted to stop '$TARGET_PROCESS_NAME' process."
+    :
 else
-    echo "Could not find or stop '$TARGET_PROCESS_NAME' process."
+    :
 fi
