@@ -3,6 +3,8 @@
 
 for file in *; do
 	
+	[ -e "$file" ] || continue
+
 	if [[ "$file" == *-* ]]; then 
 		echo "${file#*-}"
 	else 
