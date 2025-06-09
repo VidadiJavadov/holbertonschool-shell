@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #comment
 
-pkill -f |grep "4-to_infinity_and_beyond"
+ps waux | grep '4-to_infinity_and_beyond | wc -l | head -c 1'
+
 
