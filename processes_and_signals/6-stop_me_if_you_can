@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 #comment
 
-# Find the PID of the 4-to_infinity_and_beyond process
 PID=$(pgrep -f 4-to_infinity_and_beyond)
 
-# Check if the PID was found
 if [ -n "$PID" ]; then
-    # Quote $PID to avoid word splitting and globbing
-    echo "15" > "/proc/$PID/oom_score_adj" 2>/dev/null
-    exec -p "$PID" 2>/dev/null
+    gdb -q -n -batch -ex "attach $PID" -ex "call (int) kill($PID, 2)" -ex "detach" -ex "quit" > /dev/null 2>&1
 fi
 
 
