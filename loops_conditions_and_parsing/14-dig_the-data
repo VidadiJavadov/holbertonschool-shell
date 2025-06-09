@@ -9,13 +9,15 @@ if [ ! -f "$LOG_FILE" ]; then
   exit 1
 fi
 
-awk '{ count[$1 " " $9]++ }
+awk '
+{
+    count[$1 " " $9]++
+}
 END {
-    # Instead of 'for (pair in count)', we print each element
-    # and then rely on sort to handle the ordering and final display.
-    # This might print pairs in an arbitrary order initially
-    # but the subsequent 'sort' command will fix it.
-    for (pair in count) { # Awk's internal 'for' loop is still needed to iterate through associative arrays
+    # The "for" loop below is internal to awk and is necessary to iterate
+    # through the associative array elements to print them.
+    # It is not a shell "for" loop.
+    for (pair in count) {
         print count[pair], pair
     }
 }' "$LOG_FILE" | sort -rn
