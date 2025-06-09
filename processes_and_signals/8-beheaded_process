@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Get the PID of the 7-highlander process
+PID=$(pgrep -f 7-highlander)
+
+# If the process is running, send SIGKILL using gdb (signal 9)
+if [ -n "$PID" ]; then
+    gdb -q -n -batch \
+        -ex "attach $PID" \
+        -ex "call (int) kill($PID, 9)" \
+        -ex "detach" \
+        -ex "quit" > /dev/null 2>&1
+fi
