@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 #apache
 
-awk '{print $1, $9}' access.log | awk '{count[$1,$2]++} END {
-    for (key in count) {
-        split(key, parts, SUBSEP);
-        printf "%d %s %s\n", count[key], parts[1], parts[2];
-    }
-}' | sort -rn
+awk '{print $1, $9}' access.log | sort | uniq -c | awk '{print $1, $2, $3}' | sort -rn
+
 
