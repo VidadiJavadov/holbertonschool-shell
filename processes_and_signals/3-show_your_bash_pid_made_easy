@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#comment
+
+#!/usr/bin/env bash
+
+for pid_dir in /proc/[0-9]*; do
+    pid=$(basename "$pid_dir")
+    comm_file="$pid_dir/comm"
+    if [[ -f "$comm_file" && -r "$comm_file" ]]; then
+        process_name=$(cat "$comm_file" 2>/dev/null)
+        if [[ "$process_name" == *bash* ]]; then
+            echo "$pid $process_name"
+        fi
+    fi
+done
