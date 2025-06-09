@@ -1,23 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #apache
 
-LOG_FILE="apache-access.log"
-
-if [ ! -f "$LOG_FILE" ]; then
-  echo "Error: Apache log file '$LOG_FILE' not found."
-  echo "Please download and place 'apache-access.log' in the same directory as this script."
-  exit 1
-fi
-
-awk '
-{
-    count[$1 " " $9]++
-}
-END {
-    # The "for" loop below is internal to awk and is necessary to iterate
-    # through the associative array elements to print them.
-    # It is not a shell "for" loop.
-    for (pair in count) {
-        print count[pair], pair
+awk '{print $1, $9}' access.log | awk '{count[$1,$2]++} END {
+    for (key in count) {
+        split(key, parts, SUBSEP);
+        printf "%d %s %s\n", count[key], parts[1], parts[2];
     }
-}' "$LOG_FILE" | sort -rn
+}' | sort -rn
+
