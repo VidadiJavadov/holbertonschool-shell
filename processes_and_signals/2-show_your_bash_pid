@@ -2,4 +2,4 @@
 #WithBash
 # shellcheck disable=SC2009
 
-ps f -u "$USER" | grep '[b]ash'
+ps aux | grep bash
