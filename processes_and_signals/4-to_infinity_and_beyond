@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 #comment
-
 while true
 do
     echo "To infinity and beyond"
     sleep 1
-    [ -f /tmp/stop_signal ] && break
+    [ -f /tmp/stop_infinity ] && break
 done
 echo "Terminated"
 
