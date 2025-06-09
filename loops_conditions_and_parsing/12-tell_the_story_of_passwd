@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Define the path to the passwd file
+
+PASSWD_FILE="/etc/passwd"
+
+# Check if the /etc/passwd file exists
+if [ ! -f "$PASSWD_FILE" ]; then
+  echo "Error: The file '$PASSWD_FILE' was not found."
+  echo "Please ensure this file exists on your system."
+  exit 1
+fi
+
+# Process the /etc/passwd file line by line
+# IFS=: sets the field separator to a colon.
+# read -r reads the line, preventing backslash escapes.
+# We assign each colon-separated field to a variable.
+while IFS=: read -r username password_placeholder user_id group_id user_id_info home_directory command_shell; do
+  # Display the information in the specified story format
+  echo "The user $username is part of the $group_id gang, lives in $home_directory and rides $command_shell. $user_id's place is protected by the passcode $password_placeholder, more info about the user here: $user_id_info"
+done < "$PASSWD_FILE"
