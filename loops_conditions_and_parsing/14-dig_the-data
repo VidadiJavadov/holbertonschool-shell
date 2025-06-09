@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#apache
+
+LOG_FILE="apache-access.log"
+
+if [ ! -f "$LOG_FILE" ]; then
+  echo "Error: Apache log file '$LOG_FILE' not found."
+  echo "Please download and place 'apache-access.log' in the same directory as this script."
+  exit 1
+fi
+
+awk '{
+    count[$1 " " $9]++
+}
+END {
+    for (pair in count) {
+        print count[pair], pair
+    }
+}' "$LOG_FILE" | sort -rn
