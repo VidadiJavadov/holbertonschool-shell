@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #comment
 
-pkill -SIGKILL  4-to_infinity_and_beyond
+pkill -9 -e -f  4-to_infinity_and_beyond
 
 
