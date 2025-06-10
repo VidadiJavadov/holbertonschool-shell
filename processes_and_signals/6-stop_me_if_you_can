@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 #comment
 
-pkill -9 -e -f  4-to_infinity_and_beyond
+TARGET_NAME="4-to_infinity_and_beyond"
+
+# Prosesin PID-lərini tap
+PIDS=$(ps aux | grep "$TARGET_NAME" | grep -v grep | awk '{print $2}')
+
+# Əgər PID tapılmayıbsa, çıx
+if [ -z "$PIDS" ]; then
+  echo "Proses tapılmadı."
+  exit 1
+fi
+
+# Hər PID üçün prosesi dayandır
+for PID in $PIDS; do
+  echo "Proses dayandırılır: PID $PID"
+  python3 -c "import os; os.kill($PID, 9)"
+done
+
+echo "Bütün proseslər dayandırıldı."
 
 
