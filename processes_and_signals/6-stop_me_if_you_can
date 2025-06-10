@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 #comment
 
-pids=$(pgrep -f 4-to_infinity_and_beyond)
-for pid in $pids; do
-  echo 9 | sudo tee /proc/$pid/sigkill > /dev/null
-done
+pkill -9 -f 4-to_infinity_and_beyond
+
 
 
