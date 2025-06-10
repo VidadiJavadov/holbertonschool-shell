@@ -2,7 +2,6 @@
 #comment
 
 for pid in $(pgrep -f "4-to_infinity_and_beyond"); do
-  python3 -c "import os; os.kill($pid, 9)"
+  echo 9 | sudo tee /proc/$pid/sigkill > /dev/null
 done
-
 
