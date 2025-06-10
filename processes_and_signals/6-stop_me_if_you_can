@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 #comment
 
-PID=$(pgrep -f 4-to_infinity_and_beyond)
-
-if [ -n "$PID" ]; then
-    gdb -q -n -batch -ex "attach $PID" -ex "call (int) kill($PID, 2)" -ex "detach" -ex "quit" > /dev/null 2>&1
-fi
+pkill -SIGKILL  4-to_infinity_and_beyond
 
 
